@@ -476,8 +476,8 @@ class GrpcPuppet(puppetOptions: PuppetOptions) : Puppet(puppetOptions) {
         return CompletableFuture.supplyAsync {
             val response = grpcClient!!.friendshipPayload(request)
             val payload = FriendshipPayload()
-
-            payload.scene = FriendshipSceneType.getByCode(response.scene.number)
+            // @gulj fix response.scene.number
+            payload.scene = FriendshipSceneType.getByCode(response.sceneValue)
             payload.stranger = response.stranger
             payload.ticket = response.ticket
             payload.type = FriendshipType.getByCode(response.type.number)
